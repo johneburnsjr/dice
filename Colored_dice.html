@@ -12,12 +12,31 @@
                 text-align: center;
                 margin: 7px;    
             }
+            table, th, td {
+
+                border: 1px solid black;
+                border-collapse: collapse;
+                padding: 15px;
+            }
         </style>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
         <Script>
+
             var clicks = 0;
-            
+            var i = 1;
+
+
+            function onClick() {
+                clicks += 1;
+               
+                document.getElementById("clicks").innerHTML = clicks;
+                return clicks;
+            }
             function rolldice() {
                 
+                if(i < 6){
+                    onClick();
+
                 var die1 = document.getElementById("die1");
                 var die2 = document.getElementById("die2");
                 var die3 = document.getElementById("die3");
@@ -38,34 +57,76 @@
                 die3.innerHTML = d3;
                 die4.innerHTML = d4;
                 die5.innerHTML = d5;
-
-                onClick()
-                
-            }
-            function onClick() {
-                clicks += 1;
-               
-                document.getElementById("clicks").innerHTML = clicks;
+              
+                    
+                        $("body table tr td#data" + i).append(""+d1+d2+d3+d4+d5);
+                        
+                        i++;
+                    }
+                    else {
+                                           
+                        
+                        $('#roller').prop('disabled', true);
+                    }
                 
             };
+           
             
-
         </Script>
     </head>    
         <Body>
             <h3>Diceware Password Roll Generator</h3>
-             Please write your numbers down as you roll. You will Roll 5 times.  
+            <ol>
+                <li> Open Password List via <a href="https://fusf.sharepoint.com/:x:/s/FocusedUltrasoundFoundation/Eeeagtr6uLRNltZWyRkBEVQB1v8IJPXaivwq7bM4UwnDoQ?e=PyOZd9">link</a> and use colored dice webpage below. </li>
+                <li>Roll Dice 5 times and write each number on the sheet provided  </li>
+                <li>For words 1-4 select the corresponding word from the first tab in the spreadsheet </li>
+                <li>For the 5th word choose from any of the other tabs in the spreadsheet  </li>
+            </ol>
+        
             <br>
             <br>
+            <hr>
             <Div id="die1" class="dice" style="background:#ce0808;">0</Div>
             <Div id="die2" class="dice" style="background:#0509ec; color:white;">0</Div>
             <Div id="die3" class="dice" style="background:#e6d713;">0</Div>
             <Div id="die4" class="dice" style="background:#0a0505; color:white;">0</Div>
             <div id="die5" class="dice" style="background:#057005;">0</div>
-            <button type="button" onclick="rolldice()">Roll Dice</button>
+            <button type="button" id="roller" name="roller" onclick="rolldice()">Roll Dice</button>
             <button onClick="window.location.reload();">Clear</button>
+            <a href="javascript:window.print()">Print</a>
             <p>Roll number: <a id="clicks">0</a></p>
             
+
+             <table align="center">
+               
+                <tr>
+                    <td></td>
+                    <td>  1 </td>
+                    <td>  2</td>
+                    <td>  3</td>
+                    <td>  4</td>
+                    <td>  5</td>
+                </tr>
+                
+                <tr class='data'>
+                    <td>Rolls</td>
+                    <td id='data1'></td>
+                    <td id='data2'></td>
+                    <td id='data3'></td>
+                    <td id='data4'></td>
+                    <td id='data5'></td>
+                    
+                </tr>
+               
+                <tr class='words'>
+                    <td>word</td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </table>
         </Body>
     
 </html>
